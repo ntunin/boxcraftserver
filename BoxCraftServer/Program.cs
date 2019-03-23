@@ -5,40 +5,25 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Net;
 using System.Net.Sockets;
+using System.Runtime.InteropServices;
 
 namespace BoxCraftServer
 {
-    class Program
+    class Program: ConsoleProgram
     {
-        static Program program;
-
         private LogServer server;
         private ChatClient client;
 
+        public Program(string[] args): base(args)
+        {
+        }
+
         static void Main(string[] args)
         {
-            program = new Program();
-            program.Run();
+            program = new Program(args);
         }
 
-        static void OnProcessExit(object sender, EventArgs e)
-        {
-            program.Stop();
-        }
-
-        private void Stop()
-        {
-            if (server != null)
-            {
-                server.Stop();
-            }
-            if (client != null)
-            {
-                client.Close();
-            }
-        }
-
-        private void Run()
+        protected override void Run()
         {
             RunServer();
             //RunClient();
@@ -58,6 +43,18 @@ namespace BoxCraftServer
             Console.WriteLine($"Server running on {connection.ip.ToString()}:{connection.port}");
             server.Run(connection);
         }
-        
+
+        protected override void OnTerminate()
+        {
+            if (server != null)
+            {
+                server.Stop();
+            }
+            if (client != null)
+            {
+                client.Close();
+            }
+        }
+
     }
 }

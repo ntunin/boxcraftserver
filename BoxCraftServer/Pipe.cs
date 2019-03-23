@@ -34,9 +34,17 @@ namespace BoxCraftServer
             byte[] bytes = new byte[1024];
             while (running)
             {
-                int bytesRecieved = handler.Receive(bytes);
-                var message = Encoding.UTF8.GetString(bytes, 0, bytesRecieved);
-                handleMessage(message);
+                try
+                {
+                    int bytesRecieved = handler.Receive(bytes);
+                    var message = Encoding.UTF8.GetString(bytes, 0, bytesRecieved);
+                    handleMessage(message);
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e.Message);
+                    Close();
+                }
             }
         }
 

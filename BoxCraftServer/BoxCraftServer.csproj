@@ -45,6 +45,7 @@
   <ItemGroup>
     <Compile Include="ChatClient.cs" />
     <Compile Include="Client.cs" />
+    <Compile Include="ConsoleProgram.cs" />
     <Compile Include="LogServer.cs" />
     <Compile Include="Pipe.cs" />
     <Compile Include="Program.cs" />
