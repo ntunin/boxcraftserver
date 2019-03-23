@@ -23,14 +23,14 @@ namespace BoxCraftServer
             name = Console.ReadLine();
 
             Authenticate(new SocketConnection(hostName, port));
-            Send("user", name);
+            Send($"<auth user = \"{name}\"/>");
 
             running = true;
             while(running)
             {
                 Console.Write($"{name}: > ");
                 string message = Console.ReadLine();
-                Send("message", message);
+                Send($"<message user = \"{name}\">{message}</message>");
             }
         }
 
@@ -39,11 +39,6 @@ namespace BoxCraftServer
             ClearCurrentConsoleLine();
             Console.WriteLine(message);
             Console.Write($"{name}: > ");
-        }
-
-        public void Send(string type, string message)
-        {
-            Send($"<message type = \"{type}\">{message}</message>");
         }
 
         public override void Close()

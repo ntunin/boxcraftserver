@@ -26,27 +26,23 @@ namespace BoxCraftServer
         public override void HandleRequest(string request, Pipe pipe)
         {
             var element = XElement.Parse(request);
-            foreach (var attribute in element.Attributes()) {
-                if (attribute.Name.LocalName.Equals("type"))
-                {
-                    switch (attribute.Value)
-                    {
-                        case "user":
-                            RegisterUser(element, pipe);
-                            break;
-                        case "message":
-                            SendMessage(element, pipe);
-                            break;
-                    }
-                }
+
+            switch (element.Name.LocalName)
+            {
+                case "auth":
+                    RegisterUser(element, pipe);
+                    break;
+                case "message":
+                    SendMessage(element, pipe);
+                    break;
             }
         }
 
 
         private void RegisterUser(XElement element, Pipe pipe)
         {
-            var name = element.Nodes().First().ToString();
-            users[pipe.ToString()] = new User(name, pipe);
+            var name = element.Attribute(XName.Get("user")).Value;
+            users[name] = new User(name, pipe);
             var message = $"User \'{name}\' joined to the channel";
             Console.WriteLine(message);
             foreach (var key in users.Keys)
@@ -58,11 +54,9 @@ namespace BoxCraftServer
 
         private void SendMessage(XElement element, Pipe pipe)
         {
+            var name = element.Attribute(XName.Get("user")).Value;
             var content = element.Nodes().First().ToString();
-            var sender = users.Where((KeyValuePair<string, User> pair) => {
-                return pair.Key.Equals(pipe.ToString());
-            }).First().Value;
-
+            var sender = users[name];
             var message = $"\'{sender.name}\' [{DateTime.Now}]: {content}";
             Console.WriteLine(message);
             foreach (var user in users.Values)
