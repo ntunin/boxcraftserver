@@ -1,0 +1,7 @@
+C:\Users\Николай\source\repos\BoxCraftServer\BoxCraftServer\bin\Debug\BoxCraftServer.exe.config
+C:\Users\Николай\source\repos\BoxCraftServer\BoxCraftServer\bin\Debug\BoxCraftServer.exe
+C:\Users\Николай\source\repos\BoxCraftServer\BoxCraftServer\bin\Debug\BoxCraftServer.pdb
+C:\Users\Николай\source\repos\BoxCraftServer\BoxCraftServer\obj\Debug\BoxCraftServer.csprojAssemblyReference.cache
+C:\Users\Николай\source\repos\BoxCraftServer\BoxCraftServer\obj\Debug\BoxCraftServer.csproj.CoreCompileInputs.cache
+C:\Users\Николай\source\repos\BoxCraftServer\BoxCraftServer\obj\Debug\BoxCraftServer.exe
+C:\Users\Николай\source\repos\BoxCraftServer\BoxCraftServer\obj\Debug\BoxCraftServer.pdb
